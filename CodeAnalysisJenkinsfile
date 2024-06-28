@@ -23,6 +23,10 @@ pipeline {
           . env/bin/activate
           pip3.11 install --upgrade pip
           pip3.11 install -r requirements.txt
+          nodeenv -p --prebuilt --node=20.11.1
+          corepack enable
+          npm install
+          mkdir reports
           deactivate
           '''
       }
@@ -46,7 +50,7 @@ pipeline {
       steps {
         sh 'curl -O https://jdbc.postgresql.org/download/postgresql-42.7.3.jar'
         dependencyCheck odcInstallation: 'DepCheck',
-          additionalArguments: '--project "Plex Watchlist" -o ./target -f XML -f HTML -f JSON -f CSV --noupdate --connectionString $DEPCHECK_CONNSTRING dependencycheck --dbDriverPath postgresql-42.7.3.jar --dbDriverName org.postgresql.Driver --dbUser  $DEPCHECK_SCAN_ACCOUNT_USR --dbPassword $DEPCHECK_SCAN_ACCOUNT_PSW --disableYarnAudit'
+          additionalArguments: '--project "Plex Watchlist" -o ./target -f XML -f HTML -f JSON -f CSV --noupdate --connectionString $DEPCHECK_CONNSTRING dependencycheck --dbDriverPath postgresql-42.7.3.jar --dbDriverName org.postgresql.Driver --dbUser $DEPCHECK_SCAN_ACCOUNT_USR --dbPassword $DEPCHECK_SCAN_ACCOUNT_PSW --disableYarnAudit'
         dependencyCheckPublisher pattern: 'target/dependency-check-report.xml'
       }
     }
