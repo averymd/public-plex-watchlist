@@ -50,7 +50,7 @@ pipeline {
       steps {
         sh 'curl -O https://jdbc.postgresql.org/download/postgresql-42.7.3.jar'
         dependencyCheck odcInstallation: 'DepCheck',
-          additionalArguments: '--project "Plex Watchlist" -o ./target -f XML -f HTML -f JSON -f CSV --noupdate --connectionString $DEPCHECK_CONNSTRING dependencycheck --dbDriverPath postgresql-42.7.3.jar --dbDriverName org.postgresql.Driver --dbUser $DEPCHECK_SCAN_ACCOUNT_USR --dbPassword $DEPCHECK_SCAN_ACCOUNT_PSW --disableYarnAudit'
+          additionalArguments: '--project "Plex Watchlist" -o ./target -f XML -f HTML -f JSON -f CSV --noupdate --connectionString $DEPCHECK_CONNSTRING --dbDriverPath postgresql-42.7.3.jar --dbDriverName org.postgresql.Driver --dbUser $DEPCHECK_SCAN_ACCOUNT_USR --dbPassword $DEPCHECK_SCAN_ACCOUNT_PSW --disableYarnAudit'
         dependencyCheckPublisher pattern: 'target/dependency-check-report.xml'
       }
     }
@@ -67,7 +67,7 @@ pipeline {
               -Dsonar.dependencyCheck.jsonReportPath=target/dependency-check-report.json \
               -Dsonar.dependencyCheck.xmlReportPath=target/dependency-check-report.xml \
               -Dsonar.dependencyCheck.htmlReportPath=target/dependency-check-report.html \
-              -Dsonar.eslint.reportPaths=reports/eslint.json \
+              -Dsonar.eslint.reportPaths=reports/eslint.json
             deactivate
             """
         }

@@ -42,6 +42,7 @@
     "@tanstack/eslint-plugin-query": "^5.43.1",
     "buffer": "^6.0.3",
     "eslint": "^9.5.0",
+    "eslint-formatter-checkstyle": "^8.40.0",
     "eslint-plugin-react-hooks": "^5.1.0-rc-1434af3d22-20240618",
     "eslint-plugin-sonarjs": "^1.0.3",
     "events": "^3.3.0",
